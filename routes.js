@@ -16,19 +16,16 @@ const QUERY_PARAMS = {
 }
 
 function getProviders(query, callback) {
-
-  /* First do query validation */
   if (!query) {
-    return callback('Query is required')
+    query = {}
   }
-
+  /* First do query validation */
   const keys = Object.keys(query)
 
-  if (keys.length === 0) {
-    return callback('Require at least one query_param')
-  }
-
   for (let key of keys) {
+    if (key === 'limit' || key === 'skip') {
+      continue
+    }
     const validator = QUERY_PARAMS[key]
     if (!validator) {
       return callback(`We do not accept query ${key}`)
@@ -75,8 +72,13 @@ function getProviders(query, callback) {
   )
 
   provider.find(dbQuery)
-    // .limit(10)
+    .limit(query.limit ? Number(query.limit) : null)
+    .skip(query.skip ? Number(query.skip) : null)
     .exec(callback)
+}
+
+function getProvidersSize(callback) {
+  provider.count(callback)
 }
 
 function loadData(callback) {
@@ -102,5 +104,6 @@ function loadData(callback) {
 
 module.exports = {
   loadData: loadData,
-  getProviders: getProviders
+  getProviders: getProviders,
+  getProvidersSize: getProvidersSize
 }

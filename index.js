@@ -25,13 +25,20 @@ const conn = mongoose.connect(MONGO_DB_URI, {
 })
 
 app.get('/', (req, res) => {
-  res.send('Try querying the GET /providers endpoint!')
+  res.send('Try querying the GET /providers endpoint')
 })
 
 app.get('/providers', (req, res) => {
-  routes.getProviders(req.query, function(err, data) {
+  routes.getProviders(req.query, (err, data) => {
     if (err) return res.status(500).send(err)
     res.send(data)
+  })
+})
+
+app.get('/providers-size', (req, res) => {
+  routes.getProvidersSize((err, count) => {
+    if (err) return res.status(500).send(err)
+    res.send({count: count})
   })
 })
 

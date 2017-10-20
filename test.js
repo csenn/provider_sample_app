@@ -13,8 +13,18 @@ after(() =>  conn.disconnect())
 */
 
 describe('getProviders()', () => {
+  it('should get all results', done => {
+    routes.getProviders({limit: 100}, (err, data) => {
+      if (err) return done(err)
+      if (data.length !== 100) {
+        return done('Too many discharges')
+      }
+      return done(null)
+    })
+  })
+
   it('should test max discharges', done => {
-    query = { max_discharges: '25' }
+    query = { max_discharges: '25', limit: 20 }
     routes.getProviders(query, (err, data) => {
       if (err) return done(err)
       for (let result of data) {
@@ -27,7 +37,7 @@ describe('getProviders()', () => {
   })
 
   it('should test min discharges', done => {
-    query = { min_discharges: '100' }
+    query = { min_discharges: '100', limit: '20' }
     routes.getProviders(query, (err, data) => {
       if (err) return done(err)
       for (let result of data) {
@@ -42,7 +52,8 @@ describe('getProviders()', () => {
   it('should test min and max discharges', done => {
     query = {
       max_discharges: '25',
-      min_discharges: '20'
+      min_discharges: '20',
+      limit: '20'
     }
     routes.getProviders(query, (err, data) => {
       if (err) return done(err)
@@ -56,7 +67,7 @@ describe('getProviders()', () => {
   })
 
   it('should test max covered charges', done => {
-    query = { max_average_covered_charges: '10000' }
+    query = { max_average_covered_charges: '10000', limit: '20' }
     routes.getProviders(query, (err, data) => {
       if (err) return done(err)
       for (let result of data) {
@@ -69,7 +80,7 @@ describe('getProviders()', () => {
   })
 
   it('should test min covered charges', done => {
-    query = { min_average_covered_charges: '10000' }
+    query = { min_average_covered_charges: '10000', limit: '20' }
     routes.getProviders(query, (err, data) => {
       if (err) return done(err)
       for (let result of data) {
@@ -82,7 +93,7 @@ describe('getProviders()', () => {
   })
 
   it('should test max medicare', done => {
-    query = { max_average_medicare_payments: '10000' }
+    query = { max_average_medicare_payments: '10000', limit: '20' }
     routes.getProviders(query, (err, data) => {
       if (err) return done(err)
       for (let result of data) {
@@ -95,7 +106,7 @@ describe('getProviders()', () => {
   })
 
   it('should test min medicare', done => {
-    query = { min_average_medicare_payments: '10000' }
+    query = { min_average_medicare_payments: '10000', limit: '20' }
     routes.getProviders(query, (err, data) => {
       if (err) return done(err)
       for (let result of data) {
@@ -108,7 +119,7 @@ describe('getProviders()', () => {
   })
 
   it('should test state', done => {
-    query = { state: 'AL' }
+    query = { state: 'AL', limit: '20' }
     routes.getProviders(query, (err, data) => {
       if (err) return done(err)
       for (let result of data) {
