@@ -8,6 +8,7 @@ mongoose.Promise = Promise
 /* Lets keep configuration simple */
 PORT = process.env.PORT || 8000
 
+/* Provided by Heroku in production */
 MONGO_DB_URI = process.env.NODE_ENV == 'production'
   ? process.env.MONGODB_URI
   : 'mongodb://localhost/bain-example-db'
