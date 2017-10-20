@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const app = express()
 const routes = require('./routes')
 
-
 /* Lets keep configuration simple for this app */
 mongo_db_uri = process.env.NODE_ENV == 'production'
   ? process.env.MONGODB_URI
@@ -20,6 +19,10 @@ const mongoConnectOpts = {
 const conn = mongoose.connect(mongo_db_uri, {
   server: mongoConnectOpts,
   replset: mongoConnectOpts
+})
+
+app.get('/', (req, res) => {
+  res.send('Try querying the GET /providers endpoint!')
 })
 
 app.get('/providers', (req, res) => {
