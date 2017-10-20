@@ -3,7 +3,6 @@ const formatCurrency = require('format-currency')
 
 const currencyOpts = { format: '%s%v', symbol: '$' }
 const currencyKeys = [
-  'Total Discharges',
   'Average Covered Charges',
   'Average Total Payments',
   'Average Medicare Payments'

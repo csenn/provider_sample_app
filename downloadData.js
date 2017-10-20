@@ -25,7 +25,7 @@ module.exports = function downloadData(callback) {
 
       /* Turn strings into numbers */
       result = jsonData.map((row) => {
-        row['Total Discharges'] = numerify(row['Total Discharges'])
+        row['Total Discharges'] = Number(row['Total Discharges'])
         row['Average Covered Charges'] = numerify(row['Average Covered Charges'])
         row['Average Total Payments'] = numerify(row['Average Total Payments'])
         row['Average Medicare Payments'] = numerify(row['Average Medicare Payments'])
