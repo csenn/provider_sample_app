@@ -34,6 +34,9 @@ although in a real app we would probably want to name those differently.
 There are 5 endpoints to make dev simpler, although in a real app
 we certainly would not expose endpoints to drop or load the DB.
 
+The state query was left case sensitive but that could be changed using a couple
+different techniques.
+
 curl -X GET http://localhost:8000
 
 curl -X GET http://localhost:8000/providers
