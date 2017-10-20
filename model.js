@@ -33,8 +33,8 @@ const schema = new mongoose.Schema({
   /* Simple way to convert currency back to a string when returned */
   toJSON: {
     transform: function (doc, ret) {
+      delete ret['_id']
       currencyKeys.forEach(key => {
-        delete ret['_id']
         if (key in ret) {
           ret[key] = formatCurrency(ret[key], currencyOpts)
         }
