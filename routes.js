@@ -75,7 +75,7 @@ function getProviders(query, callback) {
   )
 
   provider.find(dbQuery)
-    .limit(10)
+    // .limit(10)
     .exec(callback)
 }
 

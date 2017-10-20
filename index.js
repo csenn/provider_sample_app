@@ -3,7 +3,12 @@ const mongoose = require('mongoose')
 const app = express()
 const routes = require('./routes')
 
-mongo_db_uri = 'mongodb://localhost/bain-example-db'
+
+/* Lets keep configuration simple for this app */
+mongo_db_uri = process.env.NODE_ENV == 'production'
+  ? process.env.MONGODB_URI
+  : 'mongodb://localhost/bain-example-db'
+
 mongoose.Promise = Promise
 
 const mongoConnectOpts = {
