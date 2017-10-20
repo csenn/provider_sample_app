@@ -7,12 +7,12 @@ const conn = mongoose.connect('mongodb://localhost/bain-example-db')
 after(() =>  conn.disconnect())
 
 /*
-  This is a simple set of unit tests testing our most intersting
+  This is a simple set of unit tests testing our most interesting
   route. In production we would also likely want to build
   a suite of integration tests hitting endpoints directly.
 
   For a good test framework we should create specific controlled test
-  data. But here for both speed and since we are only testing
+  data. But here for both dev speed and since we are only testing
   a simple endpoint we can just use the dev DB directly.
 */
 
