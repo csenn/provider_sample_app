@@ -3,10 +3,13 @@ const mongoose = require('mongoose')
 const app = express()
 const routes = require('./routes')
 
-/* Lets keep configuration simple for this app */
-mongo_db_uri = process.env.NODE_ENV == 'production'
+/* Lets keep configuration simple */
+PORT = process.env.PORT || 8000
+
+MONGO_DB_URI = process.env.NODE_ENV == 'production'
   ? process.env.MONGODB_URI
   : 'mongodb://localhost/bain-example-db'
+
 
 mongoose.Promise = Promise
 
@@ -16,7 +19,7 @@ const mongoConnectOpts = {
   socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 }
 }
 
-const conn = mongoose.connect(mongo_db_uri, {
+const conn = mongoose.connect(MONGO_DB_URI, {
   server: mongoConnectOpts,
   replset: mongoConnectOpts
 })
@@ -46,6 +49,6 @@ app.post('/drop-db', (req, res) => {
   })
 })
 
-app.listen(8000, function () {
-  console.log('App listening on port 8000')
+app.listen(PORT, function () {
+  console.log(`App listening on port ${PORT}`)
 })
