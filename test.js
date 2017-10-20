@@ -21,7 +21,7 @@ describe('getProviders()', () => {
     routes.getProviders({limit: 100}, (err, data) => {
       if (err) return done(err)
       if (data.length !== 100) {
-        return done('Too many discharges')
+        return done('Should be 100 results')
       }
       return done(null)
     })
@@ -30,7 +30,7 @@ describe('getProviders()', () => {
   it('should fail with bad query param', done => {
     query = { hello: '25', limit: 20 }
     routes.getProviders(query, (err, data) => {
-      /* Bad test, but proves the point */
+      /* Bad async test syntax, but proves the point */
       if (err) return done()
       return done(err)
     })
@@ -42,7 +42,7 @@ describe('getProviders()', () => {
       if (err) return done(err)
       for (let result of data) {
         if (result['Total Discharges'] > 25) {
-          return done('Too many discharges')
+          return done('Bad discharge number')
         }
       }
       return done(null)
@@ -55,7 +55,7 @@ describe('getProviders()', () => {
       if (err) return done(err)
       for (let result of data) {
         if (result['Total Discharges'] < 100) {
-          return done('Too many discharges')
+          return done('Bad discharge number')
         }
       }
       return done(null)
@@ -72,7 +72,7 @@ describe('getProviders()', () => {
       if (err) return done(err)
       for (let result of data) {
         if (result['Total Discharges'] > 25 || result['Total Discharges'] < 20) {
-          return done('Too many discharges')
+          return done('Bad discharge number')
         }
       }
       return done(null)
@@ -85,7 +85,7 @@ describe('getProviders()', () => {
       if (err) return done(err)
       for (let result of data) {
         if (result['Average Covered Charges'] > 10000) {
-          return done('Too many covered charges')
+          return done('Bad covered charges')
         }
       }
       return done(null)
@@ -98,7 +98,7 @@ describe('getProviders()', () => {
       if (err) return done(err)
       for (let result of data) {
         if (result['Average Covered Charges'] < 10000) {
-          return done('Too many covered charges')
+          return done('Bad covered charges')
         }
       }
       return done(null)
@@ -111,7 +111,7 @@ describe('getProviders()', () => {
       if (err) return done(err)
       for (let result of data) {
         if (result['Average Medicare Payments'] > 10000) {
-          return done('Too many covered charges')
+          return done('Bad medicare payments cost')
         }
       }
       return done(null)
@@ -124,7 +124,7 @@ describe('getProviders()', () => {
       if (err) return done(err)
       for (let result of data) {
         if (result['Average Medicare Payments'] < 10000) {
-          return done('Too many covered charges')
+          return done('Bad medicare payments cost')
         }
       }
       return done(null)
@@ -137,7 +137,7 @@ describe('getProviders()', () => {
       if (err) return done(err)
       for (let result of data) {
         if (result['Provider State'] !== 'AL') {
-          return done('Too many covered charges')
+          return done('Bad state param')
         }
       }
       return done(null)
