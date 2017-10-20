@@ -1,0 +1,22 @@
+{
+  "name": "bain-co-assigment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha ./test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "csvtojson": "^1.1.9",
+    "mocha": "^4.0.1",
+    "request": "^2.83.0"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "format-currency": "^1.0.0",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.12.3"
+  }
+}
