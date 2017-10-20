@@ -1,7 +1,11 @@
 const mongoose = require('mongoose')
 const formatCurrency = require('format-currency')
 
-const currencyOpts = { format: '%s%v', symbol: '$' }
+const currencyOpts = {
+  format: '%s%v',
+  symbol: '$'
+}
+
 const currencyKeys = [
   'Average Covered Charges',
   'Average Total Payments',
@@ -9,7 +13,7 @@ const currencyKeys = [
 ]
 
 /*
-  Usually would try and avoid spaces and capitals in keys,
+  Usually would try to avoid spaces and capitals in keys,
   but this is simpler for this small project
 */
 
@@ -30,6 +34,7 @@ const schema = new mongoose.Schema({
   toJSON: {
     transform: function (doc, ret) {
       currencyKeys.forEach(key => {
+        delete ret['_id']
         if (key in ret) {
           ret[key] = formatCurrency(ret[key], currencyOpts)
         }

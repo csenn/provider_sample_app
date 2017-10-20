@@ -3,15 +3,14 @@ const mongoose = require('mongoose')
 const app = express()
 const routes = require('./routes')
 
+mongoose.Promise = Promise
+
 /* Lets keep configuration simple */
 PORT = process.env.PORT || 8000
 
 MONGO_DB_URI = process.env.NODE_ENV == 'production'
   ? process.env.MONGODB_URI
   : 'mongodb://localhost/bain-example-db'
-
-
-mongoose.Promise = Promise
 
 const mongoConnectOpts = {
   reconnectTries: 30,
@@ -28,6 +27,7 @@ app.get('/', (req, res) => {
   res.send('Try querying the GET /providers endpoint')
 })
 
+/* Main endpoint */
 app.get('/providers', (req, res) => {
   routes.getProviders(req.query, (err, data) => {
     if (err) return res.status(500).send(err)
@@ -35,6 +35,7 @@ app.get('/providers', (req, res) => {
   })
 })
 
+/* Returns full record count */
 app.get('/providers-size', (req, res) => {
   routes.getProvidersSize((err, count) => {
     if (err) return res.status(500).send(err)
@@ -42,6 +43,7 @@ app.get('/providers-size', (req, res) => {
   })
 })
 
+/* Pulls csv from provided url and uploads it to mongo */
 app.post('/bootstrap', (req, res) => {
   routes.loadData(function(err) {
     if (err) return res.status(500).send(err)
@@ -49,6 +51,7 @@ app.post('/bootstrap', (req, res) => {
   })
 })
 
+/* Drops database for convenience. Not for a real application */
 app.post('/drop-db', (req, res) => {
   conn.connection.dropDatabase(err => {
     if (err) return res.status(500).send(err)

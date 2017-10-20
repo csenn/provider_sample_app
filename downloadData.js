@@ -4,7 +4,7 @@ const csv = require('csvtojson')
 const URL = 'https://s3-us-west-2.amazonaws.com/bain-coding-challenge/Inpatient_Prospective_Payment_System__IPPS__Provider_Summary_for_the_Top_100_Diagnosis-Related_Groups__DRG__-_FY2011.csv'
 
 function numerify(str) {
-  vals = str.split('')
+  let vals = str.split('')
   vals = vals.filter(a => {
     return a !== ',' && a !== '$'
   })

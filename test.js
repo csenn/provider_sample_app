@@ -7,9 +7,13 @@ const conn = mongoose.connect('mongodb://localhost/bain-example-db')
 after(() =>  conn.disconnect())
 
 /*
-  For a good test framework we should create specific test
-  data. But for speed and since here we are only testing a simple endpoint
-  we can just use the DB directly
+  This is a simple set of unit tests testing our most intersting
+  route. In production we would also likely want to build
+  a suite of integration tests hitting endpoints directly.
+
+  For a good test framework we should create specific controlled test
+  data. But here for both speed and since we are only testing
+  a simple endpoint we can just use the dev DB directly.
 */
 
 describe('getProviders()', () => {
@@ -20,6 +24,15 @@ describe('getProviders()', () => {
         return done('Too many discharges')
       }
       return done(null)
+    })
+  })
+
+  it('should fail with bad query param', done => {
+    query = { hello: '25', limit: 20 }
+    routes.getProviders(query, (err, data) => {
+      /* Bad test, but proves the point */
+      if (err) return done()
+      return done(err)
     })
   })
 

@@ -19,6 +19,7 @@ function getProviders(query, callback) {
   if (!query) {
     query = {}
   }
+
   /* First do query validation */
   const keys = Object.keys(query)
 
