@@ -46,7 +46,7 @@ app.get('/providers-size', (req, res) => {
 
 /* Pulls csv from provided url and uploads it to mongo */
 app.post('/bootstrap', (req, res) => {
-  routes.loadData(function(err) {
+  routes.loadData(err => {
     if (err) return res.status(500).send(err)
     res.send('Data was loaded')
   })
@@ -60,6 +60,6 @@ app.post('/drop-db', (req, res) => {
   })
 })
 
-app.listen(PORT, function () {
+app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`)
 })
